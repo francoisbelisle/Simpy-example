@@ -1,4 +1,6 @@
 A simple example of discret traffic signal event simulation using Simpy.
+See http://simpy.readthedocs.io/en/latest/contents.html for more information.
+
 The events in this simulation consist of : 
 - cars arriving
 - traffic signal changing states
