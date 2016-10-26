@@ -1,4 +1,4 @@
-A simple example of discret traffic signal event simulation using Simpy.
+A simple example of discret traffic signal event simulation using Simpy.  
 See http://simpy.readthedocs.io/en/latest/contents.html for more information.
 
 The events in this simulation consist of : 
@@ -6,18 +6,18 @@ The events in this simulation consist of :
 - traffic signal changing states
 - building, interrupting and relieving the traffic queues as they form.
 
-The story goes a little something like this :
+The story goes a little something like this :  
 Cars send a message to the traffic controler when they arrive
 Depending on its state, the traffic controler either:
-- let's the car go (it's green for the cars movement)
+- let's the car go (it's green for the cars' movement)
 - Puts the car in a queue (if there already is a queue or if it's red)
 
 In this example, the traffic signal has two states:
 - a 15 second WBT
-- a 45 second SBT
+- a 45 second SBT  
 Both flows for the WBT and SBT movements are randomly generated
-about every 10 seconds.
-Of course, all values should be changed to more realistic settings
+about every 10 seconds.  
+Of course, all values should be changed to more realistic settings  
 
 usage : python traffic-simulation.py
 
