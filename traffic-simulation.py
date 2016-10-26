@@ -32,6 +32,14 @@ RANDOM_SEED = 42
 SIM_TIME = 120
 LEAVE_CST = 3 
 
+from itertools import tee
+from itertools import cycle
+
+def pairwise(iterable):
+    b = cycle(iterable)
+    next(b, None)
+    return zip(iterable, b)
+
 class BroadcastPipe(object):
     """
     A Broadcast pipe that allows one process to send messages 
@@ -101,15 +109,10 @@ class TrafficControler(object):
         self.mvt = self.timings[0][0]
         print("time %d : TRAFFIC STATE CHANGING %s" % (self.env.now, self.mvt))
         while True:
-            i = 0
-            k = len(self.timings)
-            while i < len(self.timings):
-                j = i + 1
-                if j == k:
-                    j = 0
-                cur_mvt = self.timings[i][0]
-                next_mvt = self.timings[j][0]
-                self.mvt = yield self.env.timeout(self.timings[i][1], 
+            for timing in cycle(pairwise(self.timings)):
+                cur_mvt = timing[0][0]
+                next_mvt = timing[1][0]
+                self.mvt = yield self.env.timeout(timing[0][1], 
                                                   next_mvt)
 
                 print("time %d : TRAFFIC STATE CHANGING %s" % 
@@ -121,7 +124,6 @@ class TrafficControler(object):
                 
                 self.popqueue_proc_reactivate[next_mvt].succeed() 
                 self.popqueue_proc_reactivate[next_mvt] = self.env.event()
-                i += 1
 
     def traffic_monitor(self):
         while True:
