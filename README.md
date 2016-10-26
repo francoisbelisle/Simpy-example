@@ -17,7 +17,7 @@ Both flows for the WBT and SBT movements are randomly generated
 about every 10 seconds.
 Of course, all values should be changed to more realistic settings
 
-usage : python simpy-example.py
+usage : python traffic-simulation.py
 
 Simulation output is:  
 time 0 : TRAFFIC STATE CHANGING WBT  
